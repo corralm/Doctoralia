@@ -41,7 +41,7 @@ class Doctoralia(scrapy.Spider):
             'name2': gr.re_first("doctor\-name'\]\s=\s'(.*?)'"),
             'city': zr.re_first("NAME:\s'(.*?)'").strip(),
             'region': gr.re_first("region'\]\s=\s'(.*?)'"),
-            'specialization': zr.re_first("SPECIALIZATION[\s\S]*?NAME:\s'(.*?)'").strip(),
+            'specialization': gr.re_first("specialization'\]\s=\s'(.*?)'"),,
             'reviews': rx("//div/meta[@itemprop='reviewCount']/@content").get(),
             'telemedicine': gr.re_first("virtual\-consultation\-profile'\]\s=\s'(.*?)'"),
             'price': parse_price(self, response),
