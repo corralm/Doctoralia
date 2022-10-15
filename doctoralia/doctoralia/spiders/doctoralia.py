@@ -21,7 +21,7 @@ class Doctoralia(scrapy.Spider):
 
         rx = response.xpath
         # ZLApp.AppConfig
-        zr = response.css("script")[6]
+        zr = rx("//script")[6]
         # Google Tag Manager
         gr = rx("//script")[8]
         # get most common numerical value (mode) from price list
