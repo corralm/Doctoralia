@@ -9,9 +9,7 @@ class Doctoralia(scrapy.Spider):
     """Recursively crawls doctoralia.com.br and extracts doctor data."""
     name = 'DoctoraliaScraper'
     # start_urls = ['https://www.doctoralia.com.br/psicologo']
-    start_urls = [
-        local_html
-    ]
+    start_urls = local_html
 
     def parse(self, response):
         """Recursively follows links to all Doctoralia doctors and extracts data from them."""
