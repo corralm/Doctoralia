@@ -18,7 +18,8 @@ class Doctoralia(scrapy.Spider):
         gr = response.xpath("//script")[8]
         yield {
             'doctor_id': zr.re_first("DOCTOR_ID:\s(\d+)"),
-            'name': zr.re_first("FULLNAME:\s'(.*?)'"),
+            'name1': zr.re_first("FULLNAME:\s'(.*?)'"),
+            'name2': gr.re_first("doctor\-name'\]\s=\s'(.*?)'"),
             'city': zr.re_first("NAME:\s'(.*?)'").strip(),
             'specialization': zr.re_first("SPECIALIZATION[\s\S]*?NAME:\s'(.*?)'").strip(),
             'reviews': rx("//div/meta[@itemprop='reviewCount']/@content").get(),
