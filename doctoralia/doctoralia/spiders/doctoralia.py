@@ -1,4 +1,4 @@
-from statistics import mode
+from statistics import StatisticsError, mode
 import json
 import scrapy
 
@@ -24,11 +24,22 @@ class Doctoralia(scrapy.Spider):
         zr = rx("//script")[6]
         # Google Tag Manager
         gr = rx("//script")[8]
-        # get most common numerical value from price list
-        pl = rx("//div[@class='media m-0']//span[@data-id='service-price']").re('\$\\xa0(.*)')
-        pm = mode((int(p) for p in pl))
-        # get most common value from price list
-        vm = mode(rx("//span[@data-id='service-price']/span/text()").getall())
+        def parse_price(self, response):
+            """Returns most common price from services provided."""
+            # get numerical price list
+            pl = rx("//div[@class='media m-0']//span[@data-id='service-price']").re('\$\\xa0(.*)')
+            pg = (int(p) for p in pl)
+            # get alternate price list
+            vl = rx("//span[@data-id='service-price']/span/text()").getall()
+            # get most common price value, giving precedence to numerical price
+            try:
+                return mode(pg)
+            except StatisticsError:
+                try:
+                    return mode(vl)
+                except StatisticsError:
+                    return None
+
         yield {
             'doctor_id': zr.re_first("DOCTOR_ID:\s(\d+)"),
             'name1': zr.re_first("FULLNAME:\s'(.*?)'"),
@@ -38,10 +49,7 @@ class Doctoralia(scrapy.Spider):
             'specialization': zr.re_first("SPECIALIZATION[\s\S]*?NAME:\s'(.*?)'").strip(),
             'reviews': rx("//div/meta[@itemprop='reviewCount']/@content").get(),
             'telemedicine': gr.re_first("virtual\-consultation\-profile'\]\s=\s'(.*?)'"),
-            'price': (
-                vm,  # for serviço gratuito
-                pm  # for any numerical price
-            ),
+            'price': parse_price(self, response),
             'url': gr.re_first("\['gtm\-url'\]\s=\s'(.*?)'"),
 
         }
