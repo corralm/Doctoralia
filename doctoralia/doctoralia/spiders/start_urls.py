@@ -1,7 +1,7 @@
 local_html = [
-        'file:///home/miguel/Code/Doctoralia/doctoralia/doctoralia/DraFabianaFuchs.html',
-        'file:///home/miguel/Code/Doctoralia/doctoralia/doctoralia/Raquel_Navarro.html',
-        'file:///home/miguel/Code/Doctoralia/doctoralia/doctoralia/durcilene-lopes.html',
+        'file:///home/miguel/Code/Doctoralia/doctoralia/doctoralia/html_test_files/DraFabianaFuchs.html',
+        'file:///home/miguel/Code/Doctoralia/doctoralia/doctoralia/html_test_files/durcilene-lopes.html',
+        'file:///home/miguel/Code/Doctoralia/doctoralia/doctoralia/html_test_files/Raquel_Navarro.html',
 ]
 
 live_html = [
