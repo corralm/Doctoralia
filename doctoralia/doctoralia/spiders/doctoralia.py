@@ -5,29 +5,19 @@ import scrapy
 class Doctoralia(scrapy.Spider):
     """Recursively crawls doctoralia.com.br and extracts doctor data."""
     name = 'DoctoraliaScraper'
-    start_urls = ['https://www.doctoralia.com.br/psicologo']
+    # start_urls = ['https://www.doctoralia.com.br/psicologo']
+    start_urls = ['https://www.doctoralia.com.br/raquel-navarro/psicologo/manaus']
 
     def parse(self, response):
         """Recursively follows links to all Doctoralia doctors and extracts data from them."""
 
         # follow all the links to each talk on the page calling the parse_doctor callback for each of them
-        doctor_page_links = response.xpath("//span[@data-ga-event='click']")
-        yield from response.follow_all(doctor_page_links, self.parse_doctor)
+        # doctor_page_links = response.xpath("//span[@data-ga-event='click']")
+        # yield from response.follow_all(doctor_page_links, self.parse_doctor)
 
         # looks for the link to the next page, builds a URL and yields a new request to the next page
         # pagination_links = response.xpath("//a[@aria-label='next']")
         # yield from response.follow_all(pagination_links, self.parse)
-
-    
-    def parse_doctor(self, response):
-        """Parses the response, extracting the scraped psychologist data as dicts."""
-
-        # find xpath to the JSON with talk data
-        # raw = response.xpath("//script[@type='application/json']/text()").get()
-        # cast the string 'raw' to a dict
-        # js = json.loads(raw)
-        # create dict with talk data of interest
-        # d = js['props']['pageProps']['videoData']
         yield {
             'doctor_id': response.css("script")[6].re_first("DOCTOR_ID:\s(\d+)"),
             'name': response.css("script").re_first("FULLNAME:\s'(.*?)'").strip(),
@@ -44,4 +34,4 @@ class Doctoralia(scrapy.Spider):
             # 'medical_conditions_treated': ,
 
         }
- 
+    
