@@ -11,6 +11,22 @@ class Doctoralia(scrapy.Spider):
     def parse(self, response):
         """Recursively follows links to all Doctoralia doctors and extracts data from them."""
 
+        rx = response.xpath
+        # ZLApp.AppConfig
+        zr = response.css("script")[6]
+        # Google Tag Manager
+        gr = response.xpath("//script")[8]
+        yield {
+            'doctor_id': zr.re_first("DOCTOR_ID:\s(\d+)"),
+            'name': zr.re_first("FULLNAME:\s'(.*?)'"),
+            'city': zr.re_first("NAME:\s'(.*?)'").strip(),
+            'specialization': zr.re_first("SPECIALIZATION[\s\S]*?NAME:\s'(.*?)'").strip(),
+            'reviews': rx("//div/meta[@itemprop='reviewCount']/@content").get(),
+            'telemedicine': gr.re_first("virtual\-consultation\-profile'\]\s=\s'(.*?)'"),
+            'url': gr.re_first("\['gtm\-url'\]\s=\s'(.*?)'"),
+
+        }
+
         # follow all the links to each talk on the page calling the parse_doctor callback for each of them
         # doctor_page_links = response.xpath("//span[@data-ga-event='click']")
         # yield from response.follow_all(doctor_page_links, self.parse_doctor)
@@ -18,20 +34,7 @@ class Doctoralia(scrapy.Spider):
         # looks for the link to the next page, builds a URL and yields a new request to the next page
         # pagination_links = response.xpath("//a[@aria-label='next']")
         # yield from response.follow_all(pagination_links, self.parse)
-        yield {
-            'doctor_id': response.css("script")[6].re_first("DOCTOR_ID:\s(\d+)"),
-            'name': response.css("script").re_first("FULLNAME:\s'(.*?)'").strip(),
-            'location': response.css("script").re_first("NAME:\s'(.*?)'").strip(),  
-            'specialization': response.css("script")[6].re_first("SPECIALIZATION[\s\S]*?NAME:\s'(.*?)'").strip(),
-            'reviews': response.xpath("//div/meta[@itemprop='reviewCount']/@content").get(),
-            # 'price': ,  # choose a specific service, likely 'Consulta Psicologia' or 'Telemedicina'
-            'telemedicine': response.xpath("//script")[8].re_first("virtual\-consultation\-profile'\]\s=\s'(.*?)'"),
-            'url': response.xpath("//script")[8].re_first("\['gtm\-url'\]\s=\s'(.*?)'"),
-            # 'oldest_review_date': ,
-            # 'date_joined': ,
-            # 'education': ,
-            # 'experience_in': ,
-            # 'medical_conditions_treated': ,
 
-        }
     
+    # def parse_doctor(self, response):
+        """Parses the response, extracting the scraped psychologist data as dicts."""
