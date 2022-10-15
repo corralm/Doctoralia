@@ -1,3 +1,4 @@
+from statistics import mode
 import json
 import scrapy
 
@@ -22,7 +23,10 @@ class Doctoralia(scrapy.Spider):
         # ZLApp.AppConfig
         zr = response.css("script")[6]
         # Google Tag Manager
-        gr = response.xpath("//script")[8]
+        gr = rx("//script")[8]
+        # get most common numerical value (mode) from price list
+        pl = rx("//div[@class='media m-0']//span[@data-id='service-price']").re('\$\\xa0(.*)')
+        pm = mode((int(p) for p in pl))
         yield {
             'doctor_id': zr.re_first("DOCTOR_ID:\s(\d+)"),
             'name1': zr.re_first("FULLNAME:\s'(.*?)'"),
@@ -32,7 +36,10 @@ class Doctoralia(scrapy.Spider):
             'specialization': zr.re_first("SPECIALIZATION[\s\S]*?NAME:\s'(.*?)'").strip(),
             'reviews': rx("//div/meta[@itemprop='reviewCount']/@content").get(),
             'telemedicine': gr.re_first("virtual\-consultation\-profile'\]\s=\s'(.*?)'"),
-            # 'price': rx("//span[@data-id='service-price'] | //span[@data-id='service-price']/span/text()").get(),
+            'price': (
+                rx("//span[@data-id='service-price']/span/text()").getall(),  # for serviço gratiuito
+                pm  # for any numerical price
+            ),
             'url': gr.re_first("\['gtm\-url'\]\s=\s'(.*?)'"),
 
         }
