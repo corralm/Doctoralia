@@ -25,6 +25,7 @@ class Doctoralia(scrapy.Spider):
             'specialization': zr.re_first("SPECIALIZATION[\s\S]*?NAME:\s'(.*?)'").strip(),
             'reviews': rx("//div/meta[@itemprop='reviewCount']/@content").get(),
             'telemedicine': gr.re_first("virtual\-consultation\-profile'\]\s=\s'(.*?)'"),
+            # 'price': rx("//span[@data-id='service-price'] | //span[@data-id='service-price']/span/text()").get(),
             'url': gr.re_first("\['gtm\-url'\]\s=\s'(.*?)'"),
 
         }
