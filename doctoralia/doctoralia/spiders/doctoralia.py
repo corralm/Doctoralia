@@ -8,13 +8,18 @@ class Doctoralia(scrapy.Spider):
     name = 'DoctoraliaScraper'
     # start_urls = ['https://www.doctoralia.com.br/psicologo']
     start_urls = [
-        'https://www.doctoralia.com.br/raquel-navarro/psicologo/manaus',
-        'https://www.doctoralia.com.br/fabiana-fuchs/psicologo-psicanalista/rio-de-janeiro',
-        'https://www.doctoralia.com.br/pamella-lima/psicologo/sao-paulo',
-        'https://www.doctoralia.com.br/ivana-andrade/psicologo/belo-horizonte',
-        'https://www.doctoralia.com.br/isabella-gutierres/psicologo/sorocaba',
-        'https://www.doctoralia.com.br/anna-gabryella-lopes-coelho/psicologo/goiania',
-        ]
+        # 'https://www.doctoralia.com.br/raquel-navarro/psicologo/manaus',
+        # 'https://www.doctoralia.com.br/fabiana-fuchs/psicologo-psicanalista/rio-de-janeiro',
+        # 'https://www.doctoralia.com.br/pamella-lima/psicologo/sao-paulo',
+        # 'https://www.doctoralia.com.br/ivana-andrade/psicologo/belo-horizonte',
+        # 'https://www.doctoralia.com.br/isabella-gutierres/psicologo/sorocaba',
+        # 'https://www.doctoralia.com.br/anna-gabryella-lopes-coelho/psicologo/goiania',
+        
+        # Local HTML files
+        'file:///home/miguel/Code/Doctoralia/doctoralia/doctoralia/DraFabianaFuchs.html',
+        'file:///home/miguel/Code/Doctoralia/doctoralia/doctoralia/Raquel_Navarro.html',
+        'file:///home/miguel/Code/Doctoralia/doctoralia/doctoralia/durcilene-lopes.html',
+    ]
 
     def parse(self, response):
         """Recursively follows links to all Doctoralia doctors and extracts data from them."""
