@@ -9,11 +9,25 @@ from .start_urls import live_html, local_html
 class Doctoralia(scrapy.Spider):
     """Recursively crawls doctoralia.com.br and extracts doctor data."""
     name = 'DoctoraliaScraper'
-    # start_urls = ['https://www.doctoralia.com.br/psicologo']
-    start_urls = local_html
+    start_urls = ['https://www.doctoralia.com.br/psicologo']
+    # start_urls = local_html
 
     def parse(self, response):
         """Recursively follows links to all Doctoralia doctors and extracts data from them."""
+        rx, rf = response.xpath, response.follow_all
+        # follow all the links to each talk on the page calling the
+        # parse_doctor callback for each of them
+        dr_page_links = rx("//div[@class='media']/div[@class='pr-1']//@href")
+        yield from rf(dr_page_links, self.parse_doctor)
+
+        # looks for the link to the next page, builds a URL and yields a new
+        # request to the next page
+        pagination_links = rx("//a[@aria-label='next']")
+        yield from rf(pagination_links, self.parse)
+
+
+    def parse_doctor(self, response):
+        """Parses the response, extracting the scraped psychologist data as dicts."""
 
         rx = response.xpath
         # ZLApp.AppConfig
@@ -52,14 +66,3 @@ class Doctoralia(scrapy.Spider):
             'price': parse_price(self, response),
             'url': gr.re_first("\['gtm\-url'\]\s=\s'(.*?)'"),
         }
-
-        # follow all the links to each talk on the page calling the parse_doctor callback for each of them
-        # doctor_page_links = response.xpath("//span[@data-ga-event='click']")
-        # yield from response.follow_all(doctor_page_links, self.parse_doctor)
-
-        # looks for the link to the next page, builds a URL and yields a new request to the next page
-        # pagination_links = response.xpath("//a[@aria-label='next']")
-        # yield from response.follow_all(pagination_links, self.parse)
-
-    # def parse_doctor(self, response):
-        """Parses the response, extracting the scraped psychologist data as dicts."""
