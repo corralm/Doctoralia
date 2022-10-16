@@ -22,8 +22,8 @@ class Doctoralia(scrapy.Spider):
 
         # looks for the link to the next page, builds a URL and yields a new
         # request to the next page
-        # pagination_links = rx("//a[@aria-label='next']")
-        # yield from rf(pagination_links, self.parse)
+        pagination_links = rx("//a[@aria-label='next']")
+        yield from rf(pagination_links, self.parse)
 
 
     def parse_doctor(self, response):
