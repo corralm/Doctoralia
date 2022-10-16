@@ -33,7 +33,7 @@ class Doctoralia(scrapy.Spider):
                 try:
                     return mode(vl)
                 except StatisticsError:
-                    return None
+                    return 0
 
         yield {
             'doctor_id': zr.re_first("DOCTOR_ID:\s(\d+)"),
