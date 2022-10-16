@@ -7,10 +7,20 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+from pathlib import Path
+from datetime import datetime
+
+
+now = datetime.now().strftime('%Y%m%d%H%M')
+
 BOT_NAME = 'doctoralia'
 
 SPIDER_MODULES = ['doctoralia.spiders']
 NEWSPIDER_MODULE = 'doctoralia.spiders'
+
+# Logging
+LOG_LEVEL = 'INFO'
+LOG_FILE = f'./doctoralia/logs/{now}.log'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
