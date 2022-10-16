@@ -20,10 +20,12 @@ class Doctoralia(scrapy.Spider):
         zr = rx("//script")[6]
         # Google Tag Manager
         gr = rx("//script")[8]
+
         def parse_price(self, response):
             """Returns most common price from services provided."""
             # get numerical price list
-            pl = rx("//div[@class='media m-0']//span[@data-id='service-price']").re('\$\\xa0(.*)')
+            pl = rx(
+                "//div[@class='media m-0']//span[@data-id='service-price']").re('\$\\xa0(.*)')
             pg = (int(p) for p in pl)
             # get alternate price list
             vl = rx("//span[@data-id='service-price']/span/text()").getall()
@@ -48,7 +50,6 @@ class Doctoralia(scrapy.Spider):
             'telemedicine': gr.re_first("virtual\-consultation\-profile'\]\s=\s'(.*?)'"),
             'price': parse_price(self, response),
             'url': gr.re_first("\['gtm\-url'\]\s=\s'(.*?)'"),
-
         }
 
         # follow all the links to each talk on the page calling the parse_doctor callback for each of them
@@ -59,6 +60,5 @@ class Doctoralia(scrapy.Spider):
         # pagination_links = response.xpath("//a[@aria-label='next']")
         # yield from response.follow_all(pagination_links, self.parse)
 
-    
     # def parse_doctor(self, response):
         """Parses the response, extracting the scraped psychologist data as dicts."""
