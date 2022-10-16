@@ -1,9 +1,8 @@
-import json
 from statistics import StatisticsError, mode
 
 import scrapy
 
-from .start_urls import live_html, local_html
+# from .start_urls import live_html, local_html
 
 
 class Doctoralia(scrapy.Spider):
