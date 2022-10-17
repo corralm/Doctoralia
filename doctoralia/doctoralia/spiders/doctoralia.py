@@ -35,11 +35,11 @@ class Doctoralia(scrapy.Spider):
         def parse_price(self, response):
             """Returns most common price from services provided."""
             # get numerical price list
-            pl = rx(
-                "//div[@class='media m-0']//span[@data-id='service-price']").re('\$\\xa0(.*)')
+            sp = "//span[@data-id='service-price']"
+            pl = rx(f"//div[@class='media m-0']{sp}").re('\$\\xa0(.*)')
             pg = (int(p) for p in pl)
             # get alternate price list
-            vl = rx("//span[@data-id='service-price']/span/text()").getall()
+            vl = rx(f"{sp}/span/text()").getall()
             # get most common price value, giving precedence to numerical price
             try:
                 return mode(pg)
