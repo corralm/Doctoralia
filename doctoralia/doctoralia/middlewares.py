@@ -3,10 +3,14 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-from scrapy import signals
+import logging
+from itertools import cycle
 
 # useful for handling different item types with a single interface
-from itemadapter import is_item, ItemAdapter
+from itemadapter import ItemAdapter, is_item
+from scrapy import signals
+
+logger = logging.getLogger(__name__)
 
 
 class DoctoraliaSpiderMiddleware:
@@ -101,3 +105,32 @@ class DoctoraliaDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class DoctoraliaUserAgentsMiddleware:
+    """This middleware allows spiders to override the user_agent"""
+
+    def __init__(self, user_agents):
+        self.user_agents = user_agents
+        if self.user_agents:
+            self.user_agents_cycle = cycle(self.user_agents)
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        o = cls(crawler.settings['USER_AGENTS'])
+        crawler.signals.connect(o.spider_opened, signal=signals.spider_opened)
+        return o
+
+    def spider_opened(self, spider):
+        self.user_agents = getattr(spider, 'user_agents', self.user_agents)
+        if self.user_agents:
+            self.user_agents_cycle = cycle(self.user_agents)
+        logger.info('Load {} user_agents from settings.'.format(
+            len(self.user_agents) if self.user_agents else 0))
+
+    def process_request(self, request, spider):
+        if request.headers.get('User-Agent'):
+            return
+        if self.user_agents:
+            request.headers.setdefault(b'User-Agent',
+                                       next(self.user_agents_cycle))
