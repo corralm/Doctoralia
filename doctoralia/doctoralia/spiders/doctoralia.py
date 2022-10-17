@@ -37,7 +37,7 @@ class Doctoralia(scrapy.Spider):
             # get numerical price list
             sp = "//span[@data-id='service-price']"
             pl = rx(f"//div[@class='media m-0']{sp}").re('\$\\xa0(.*)')
-            pg = (int(p) for p in pl)
+            pg = (int(p.replace('.', '')) for p in pl)
             # get alternate price list
             vl = rx(f"{sp}/span/text()").getall()
             # get most common price value, giving precedence to numerical price
