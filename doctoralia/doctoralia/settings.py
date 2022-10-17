@@ -32,10 +32,10 @@ REDIRECT_ENABLED = False
 
 # USER AGENT
 
-DOWNLOADER_MIDDLEWARES.update({
+DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
     'scrapy_useragents.downloadermiddlewares.useragents.UserAgentsMiddleware': 500,
-})
+}
 
 USER_AGENTS = [
     ('Mozilla/5.0 (X11; Linux x86_64) '
