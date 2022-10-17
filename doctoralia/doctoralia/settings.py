@@ -22,6 +22,10 @@ NEWSPIDER_MODULE = 'doctoralia.spiders'
 LOG_LEVEL = 'INFO'
 LOG_FILE = f'./doctoralia/logs/{now}.log'
 
+# Other settings
+# https://docs.scrapy.org/en/latest/topics/broad-crawls.html#disable-redirects
+REDIRECT_ENABLED = False
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'doctoralia (+http://www.yourdomain.com)'
