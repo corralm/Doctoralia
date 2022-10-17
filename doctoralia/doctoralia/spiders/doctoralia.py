@@ -24,10 +24,8 @@ class Doctoralia(scrapy.Spider):
         pagination_links = rx("//a[@aria-label='next']")
         yield from rf(pagination_links, self.parse)
 
-
     def parse_doctor(self, response):
         """Parses the response, extracting the scraped psychologist data as dicts."""
-
         rx = response.xpath
         # ZLApp.AppConfig
         zr = rx("//script")[6]
