@@ -14,13 +14,13 @@ class Doctoralia(scrapy.Spider):
     def parse(self, response):
         """Recursively follows links to all Doctoralia doctors and extracts data from them."""
         rx, rf = response.xpath, response.follow_all
-        # follow all the links to each talk on the page calling the
-        # parse_doctor callback for each of them
+        # Follow all the links to each talk on the page calling the
+        # parse_doctor callback for each of them.
         dr_page_links = rx("//div[@class='media']/div[@class='pr-1']//@href")
         yield from rf(dr_page_links, self.parse_doctor)
 
-        # looks for the link to the next page, builds a URL and yields a new
-        # request to the next page
+        # Looks for the link to the next page, builds a URL and yields a new
+        # request to the next page.
         pagination_links = rx("//a[@aria-label='next']")
         yield from rf(pagination_links, self.parse)
 
