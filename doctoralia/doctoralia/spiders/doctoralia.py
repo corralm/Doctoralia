@@ -58,7 +58,7 @@ class Doctoralia(scrapy.Spider):
             'region': gr.re_first("region'\]\s=\s'(.*?)'"),
             'specialization': gr.re_first("specialization'\]\s=\s'(.*?)'"),
             'reviews': rx("//div/meta[@itemprop='reviewCount']/@content").get(),
-            'oldest_review_date': min(rx("//time/@datetime").getall(), default=''),
+            # 'oldest_review_date': min(rx("//time/@datetime").getall(), default=''),
             'newest_review_date': max(rx("//time/@datetime").getall(), default=''),
             'telemedicine': gr.re_first("virtual\-consultation\-profile'\]\s=\s'(.*?)'"),
             'price': parse_price(self, response),
