@@ -1,12 +1,10 @@
 from datetime import datetime
 from statistics import StatisticsError, mode
 
-import scrapy
-
-# from .start_urls import live_html, local_html
+from scrapy.spiders import Spider
 
 
-class Doctoralia(scrapy.Spider):
+class Doctoralia(Spider):
     """Recursively crawls doctoralia.com.br and extracts doctor data."""
     name = 'DoctoraliaScraper'
     start_urls = ['https://www.doctoralia.com.br/psicologo']
