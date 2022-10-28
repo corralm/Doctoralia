@@ -1,3 +1,9 @@
+# Files and folders for testing
+*.jl
+html_test_files
+notebook.ipynb
+notes.md
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
