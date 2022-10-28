@@ -1,3 +1,4 @@
+from datetime import datetime
 from statistics import StatisticsError, mode
 
 import scrapy
@@ -63,4 +64,5 @@ class Doctoralia(scrapy.Spider):
             'telemedicine': gr.re_first("virtual\-consultation\-profile'\]\s=\s'(.*?)'"),
             'price': parse_price(self, response),
             'url': gr.re_first("\['gtm\-url'\]\s=\s'(.*?)'"),
+            'fetch_time': f"{datetime.now():%Y-%m-%dT%H:%M:%S}",
         }
