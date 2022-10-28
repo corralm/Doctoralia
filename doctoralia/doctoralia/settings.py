@@ -18,6 +18,9 @@ BOT_NAME = 'doctoralia'
 SPIDER_MODULES = ['doctoralia.spiders']
 NEWSPIDER_MODULE = 'doctoralia.spiders'
 
+# See https://docs.scrapy.org/en/latest/topics/request-response.html#request-fingerprinter-implementation
+REQUEST_FINGERPRINTER_IMPLEMENTATION = '2.7'
+
 # Logging
 LOG_LEVEL = 'INFO'
 LOG_FILE = f'./doctoralia/logs/{now}.log'
