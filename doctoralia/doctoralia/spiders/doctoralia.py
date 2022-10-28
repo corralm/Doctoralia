@@ -30,7 +30,8 @@ class Doctoralia(Spider):
         # Follow all the links to each talk on the page calling the
         # parse_doctor callback for each of them.
         dr_page_links = rx("//div[@class='media']/div[@class='pr-1']//@href")
-        yield from rf(dr_page_links, self.parse_doctor)
+        links = [l for l in dr_page_links.getall() if '/clinicas/' not in l]
+        yield from rf(links, self.parse_doctor)
 
     def parse_doctor(self, response):
         """Parses the response, extracting the scraped psychologist data as dicts."""
