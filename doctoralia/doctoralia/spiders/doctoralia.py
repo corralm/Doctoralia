@@ -8,20 +8,29 @@ class Doctoralia(Spider):
     """Recursively crawls doctoralia.com.br and extracts doctor data."""
     name = 'DoctoraliaScraper'
     allowed_domains = ['doctoralia.com.br']
-    start_urls = ['https://www.doctoralia.com.br/psicologo']
+    start_urls = [
+        'https://www.doctoralia.com.br/especializacoes-medicas',  # all specializations
+        # 'https://www.doctoralia.com.br/ginecologista',  # one specialization
+    ]
 
     def parse(self, response):
         """Recursively follows links to all Doctoralia doctors and extracts data from them."""
-        rx, rf = response.xpath, response.follow_all
+        rx, rc, rf = response.xpath, response.css, response.follow_all
+
+        # Looks for the link to each specialization, builds a URL and yields a new
+        # request to the pagination links.
+        spec_links = rc(".align-items-center .text-muted::attr(href)")
+        yield from rf(spec_links, self.parse)
+
+       # Looks for the link to the next page, builds a URL and yields a new
+       # request to the next page.
+        pagination_links = rx("//a[@aria-label='next']")
+        yield from rf(pagination_links, self.parse)
+
         # Follow all the links to each talk on the page calling the
         # parse_doctor callback for each of them.
         dr_page_links = rx("//div[@class='media']/div[@class='pr-1']//@href")
         yield from rf(dr_page_links, self.parse_doctor)
-
-        # Looks for the link to the next page, builds a URL and yields a new
-        # request to the next page.
-        pagination_links = rx("//a[@aria-label='next']")
-        yield from rf(pagination_links, self.parse)
 
     def parse_doctor(self, response):
         """Parses the response, extracting the scraped psychologist data as dicts."""
