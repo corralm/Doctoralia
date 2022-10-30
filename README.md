@@ -1,6 +1,9 @@
 # DoctoraliaScraper
 DoctoraliaScraper recursively crawls [doctoralia.com.br](https://www.doctoralia.com.br/) and extracts doctor data. This scraper was built with Scrapy 2.7.0.
 
+## About Doctoralia
+Doctoralia is an global online platform that allows users to search, read ratings, and book appointments with healthcare professionals. It is highly popular in Brazil.
+
 ## Inspiration
 Selecting a healthcare professional is an important decision and it can be challenging to find the right person for you. 
 
