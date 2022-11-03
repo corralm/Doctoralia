@@ -9,6 +9,9 @@ Selecting a healthcare professional is an important decision and it can be chall
 
 I built DoctoraliaScraper to create a dataset of all healthcare professionals in 🇧🇷 Brazil (where I'm currently located) including price, location, specialization, and number of reviews. Find the best healthcare professional for you!
 
+## Dataset
+Check out a dataset of 165k doctors and healthcare professionals in Brazil I published on [Kaggle.com](https://www.kaggle.com/datasets/miguelcorraljr/doctoralia-brasil).
+
 ## Attributes
 |   Attribute     |   Description                                                                            |   Data Type           |
 |-----------------|------------------------------------------------------------------------------------------|-----------------------|
