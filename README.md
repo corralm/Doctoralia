@@ -1,7 +1,7 @@
 # DoctoraliaScraper
 DoctoraliaScraper recursively crawls [doctoralia.com.br](https://www.doctoralia.com.br/) and extracts data from healthcare professionals listed on Doctoralia.
 
-I built DoctoraliaScraper to create a dataset of all healthcare professionals in 🇧🇷 Brazil (where I'm currently located) including price, location, specialization, and number of reviews to find the best professionals.
+I built DoctoraliaScraper to create a dataset of all healthcare professionals in 🇧🇷 Brazil (where I was located at the time) including price, location, specialization, and number of reviews to find the best professionals.
 
 ## About Doctoralia
 Doctoralia is an global online platform that allows users to search, read ratings, and book appointments with healthcare professionals. It is highly popular in Brazil.
