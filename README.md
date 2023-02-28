@@ -39,7 +39,7 @@ Check out a dataset of 165k doctors and healthcare professionals in Brazil I pub
 ## Meta
 Author: Miguel Corral Jr.  
 Email: corraljrmiguel@gmail.com  
-LinkedIn: https://www.linkedin.com/in/miguelcorraljr/  
+LinkedIn: https://www.linkedin.com/in/iMiguel  
 GitHub: https://github.com/corralm
 
 Distributed under the MIT license. See [LICENSE](./LICENSE) for more information.
