@@ -6,6 +6,29 @@ I built DoctoraliaScraper to create a dataset of all healthcare professionals in
 ## About Doctoralia
 Doctoralia is an global online platform that allows users to search, read ratings, and book appointments with healthcare professionals. It is highly popular in Brazil.
 
+## Inspiration
+Selecting a healthcare professional is an important decision and it can be challenging to find the right person for you. 
+
+I built DoctoraliaScraper to create a dataset of all healthcare professionals in 🇧🇷 Brazil (where I'm currently located) including price, location, specialization, and number of reviews. Find the best healthcare professional for you!
+
+## Requirements
+
+- Python
+- [Scrapy](https://scrapy.org)
+- [tqdm](https://tqdm.github.io)
+- [Pandas](https://pandas.pydata.org) (optional)
+
+## Usage
+
+1. Clone this repository
+2. Move to the `doctoralia-scraper` directory
+3. Run `scrapy runspider scrapy-project/doctoralia/spiders/doctoralia.py -o output.jl`. This generates a JSON lines file which you can read with Pandas:
+
+```python
+import pandas as pd
+df = pd.read_json('./output.jl', lines=True)
+```
+
 ## Dataset
 Check out a dataset of 165k doctors and healthcare professionals in Brazil I published on [Kaggle.com](https://www.kaggle.com/datasets/miguelcorraljr/doctoralia-brasil).
 
