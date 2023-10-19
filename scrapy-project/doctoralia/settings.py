@@ -12,13 +12,10 @@ from datetime import datetime
 
 now = datetime.now().strftime('%Y%m%d%H%M')
 
-BOT_NAME = 'doctoralia'
+BOT_NAME = "doctoralia"
 
-SPIDER_MODULES = ['doctoralia.spiders']
-NEWSPIDER_MODULE = 'doctoralia.spiders'
-
-# See https://docs.scrapy.org/en/latest/topics/request-response.html#request-fingerprinter-implementation
-REQUEST_FINGERPRINTER_IMPLEMENTATION = '2.7'
+SPIDER_MODULES = ["doctoralia.spiders"]
+NEWSPIDER_MODULE = "doctoralia.spiders"
 
 # Logging
 LOG_LEVEL = 'INFO'
@@ -34,9 +31,8 @@ DEPTH_PRIORITY = 1
 SCHEDULER_DISK_QUEUE = 'scrapy.squeues.PickleFifoDiskQueue'
 SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue'
 
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'doctoralia (+http://www.yourdomain.com)'
+#USER_AGENT = "doctoralia (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -47,7 +43,7 @@ ROBOTSTXT_OBEY = True
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# DOWNLOAD_DELAY = 2
+#DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -60,32 +56,32 @@ COOKIES_ENABLED = False
 
 # Override the default request headers:
 #DEFAULT_REQUEST_HEADERS = {
-#   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-#   'Accept-Language': 'en',
+#    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+#    "Accept-Language": "en",
 #}
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'doctoralia.middlewares.DoctoraliaSpiderMiddleware': 543,
+#    "doctoralia.middlewares.DoctoraliaSpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'doctoralia.middlewares.DoctoraliaDownloaderMiddleware': 543,
+#    "doctoralia.middlewares.DoctoraliaDownloaderMiddleware": 543,
 #}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
-#    'scrapy.extensions.telnet.TelnetConsole': None,
+#    "scrapy.extensions.telnet.TelnetConsole": None,
 #}
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'doctoralia.pipelines.DoctoraliaPipeline': 300,
+#    "doctoralia.pipelines.DoctoraliaPipeline": 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -105,6 +101,11 @@ AUTOTHROTTLE_MAX_DELAY = 60
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
 #HTTPCACHE_ENABLED = True
 #HTTPCACHE_EXPIRATION_SECS = 0
-#HTTPCACHE_DIR = 'httpcache'
+#HTTPCACHE_DIR = "httpcache"
 #HTTPCACHE_IGNORE_HTTP_CODES = []
-#HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+#HTTPCACHE_STORAGE = "scrapy.extensions.httpcache.FilesystemCacheStorage"
+
+# Set settings whose default value is deprecated to a future-proof value
+REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
+TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
+FEED_EXPORT_ENCODING = "utf-8"
