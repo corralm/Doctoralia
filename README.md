@@ -1,5 +1,7 @@
 # DoctoraliaScraper
-DoctoraliaScraper recursively crawls [doctoralia.com.br](https://www.doctoralia.com.br/) and extracts doctor data. This scraper was built with Scrapy 2.7.0.
+DoctoraliaScraper recursively crawls [doctoralia.com.br](https://www.doctoralia.com.br/) and extracts data from healthcare professionals listed on Doctoralia.
+
+I built DoctoraliaScraper to create a dataset of all healthcare professionals in 🇧🇷 Brazil (where I was located at the time) including price, location, specialization, and number of reviews to find the best professionals.
 
 ## About Doctoralia
 Doctoralia is an global online platform that allows users to search, read ratings, and book appointments with healthcare professionals. It is highly popular in Brazil.
@@ -60,7 +62,7 @@ Check out a dataset of 165k doctors and healthcare professionals in Brazil I pub
 ## Meta
 Author: Miguel Corral Jr.  
 Email: corraljrmiguel@gmail.com  
-LinkedIn: https://www.linkedin.com/in/miguelcorraljr/  
+LinkedIn: https://www.linkedin.com/in/iMiguel  
 GitHub: https://github.com/corralm
 
 Distributed under the MIT license. See [LICENSE](./LICENSE) for more information.
